@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>SCA ARGENTINA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="icono.jpg" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <style>
+        /* Otros estilos */
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background: rgba(0, 0, 0, 0.9);
+                width: 100%;
+                position: absolute;
+                top: 120px; /* Ajusta este valor para que el menú se despliegue más abajo */
+                left: 0;
+                z-index: 101;
+                padding: 10px 0;
+                transition: max-height 0.3s ease-in-out;
+                max-height: 0;
+                overflow: hidden;
+            }
+
+            nav.show {
+                display: flex;
+                max-height: 500px; /* Ajusta este valor según sea necesario */
+            }
+
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #f39c12;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                color: white;
+                cursor: pointer;
+                z-index: 102;
+            }
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?technology,factory') no-repeat center center/cover;
+            position: relative;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            text-align: center; /* Centrar el texto horizontalmente */
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #6dd5fa, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1.5s ease-in-out;
+            margin: 0; /* Eliminar márgenes */
+            margin-top: -275px; /* Ajusta este valor para subir el texto */
+        }
+
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 50px 0;
+            text-align: center;
+            margin-top: -400px; /* Reduce este valor para subir, o aumenta para bajar */
+        }
+
+        .service {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            width: 300px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .service i {
+            font-size: 3rem;
+            color: #f39c12;
+            margin-bottom: 20px;
+        }
+
+        .service h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .service p {
+            color: #ddd;
+        }
+
+        /* Ajustes responsivos */
+        @media (max-width: 1200px) {
+            .top-bar {
+                padding: 10px 20px;
+            }
+            .logo-container img {
+                width: 200px;
+            }
+            nav ul li a {
+                font-size: 1rem;
+            }
+            .header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav ul {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            nav ul li a {
+                font-size: 1rem;
+                padding: 10px;
+                text-align: left;
+            }
+            .services {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .service {
+                width: 90%;
+            }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar {
+                padding: 10px;
+            }
+            .logo-container img {
+                width: 150px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .services {
+                gap: 10px;
+            }
+            .service {
+                padding: 20px;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Personalización de la barra de desplazamiento */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border-radius: 12px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+        }
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            border-radius: 12px;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to bottom, #1c1c1c, #2c3e50);
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        /* Fondo animado de partículas */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Estilo del menú de navegación */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            width: 250px;
+            height: auto;
+            margin-right: 15px;
+            border-radius: 10%;
+        }
+
+        .logo-container h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(45deg, #6dd5fa, #2980b9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 1px 15px;
+            border-radius: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s;
+        }
+
+        nav ul li a:hover {
+            color: #f39c12;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Sección de Noticias */
+        .news {
+            padding: 50px 20px;
+            background: #34495e;
+            color: white;
+            text-align: center;
+        }
+
+        .news h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .news-item {
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-cta:hover {
+            background: linear-gradient(45deg, #e67e22, #f39c12);
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(45deg, #34495e, #2c3e50);
+            color: white;
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 0.9rem;
+            box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        footer a {
+            color: #6dd5fa;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer .social-icons {
+            margin-top: 10px;
+        }
+
+        footer .social-icons a {
+            color: #fff;
+            font-size: 2rem;
+            margin: 0 15px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        footer .social-icons a:hover {
+            color: #007bff;
+            transform: scale(1.2);
+            animation: pulse 0.6s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #f39c12;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            display: none;
+            cursor: pointer;
+            z-index: 999;
+        }
+
+        #back-to-top:hover {
+            background: #e67e22;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación -->
+    <div class="top-bar">
+        <div class="logo-container">
+            <!-- El logo ahora es un enlace que lleva al inicio -->
+            <a href="index.html">
+                <img src="SCA4.png" alt="Logo de SCA Argentina">
+            </a>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a href="Contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+            <li><a href="SobreNosotros.html"><i class="fas fa-users"></i> Sobre Nosotros</a></li>
+            <li><a href="aquenosdedicamos.html"><i class="fas fa-cogs"></i> ¿A qué nos dedicamos?</a></li>
+        </ul>
+    </nav>
+
+    <!-- Fondo de partículas animadas -->
+    <div id="particles-js"></div>
+
+    <!-- Contenedor de imagen y título -->
+    <div class="header">
+        <h1>Sistemas, Control y Automatización</h1>
+    </div>
+
+    <!-- Sección de Servicios -->
+    <section class="services">
+        <div class="service">
+            <i class="fas fa-cogs"></i>
+            <h3>Automatización</h3>
+            <p>Soluciones automatizadas para optimizar tus procesos.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-chart-line"></i>
+            <h3>Control</h3>
+            <p>Monitoreo y control de procesos industriales en tiempo real.</p>
+        </div>
+        <div class="service">
+            <i class="fas fa-users-cog"></i>
+            <h3>Consultoría</h3>
+            <p>Consultoría para mejorar la eficiencia de tu negocio.</p>
+        </div>
+    </section>
+
+    <!-- Sección de Noticias -->
+    <section class="news">
+        <h2>Últimas Noticias</h2>
+        <div class="news-item">
+            <h4>Nuevo Proyecto de Automatización</h4>
+            <p>Acabamos de implementar un sistema de automatización en la industria...</p>
+        </div>
+        <div class="news-item">
+            <h4>¡Estamos en Expansión!</h4>
+            <p>Estamos expandiendo nuestra presencia a nuevos mercados...</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 SCA Argentina. Todos los derechos reservados.</p>
+        <p>Síguenos en nuestras redes sociales:</p>
+        <div class="social-icons">
+            <a href="https://wa.me/+5492975362879" target="_blank"><i class="fab fa-whatsapp"></i></a> 
+            <a href="https://www.linkedin.com/company/scasrl/?viewAsMember=true" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <div id="back-to-top" onclick="scrollToTop()">↑</div>
+
+    <script>
+        // Activar partículas de fondo que siguen al mouse
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 }},
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 3 },
+                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    attract: { enable: true, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" }
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 }
+                }
+            }
+        });
+
+        // Función para scroll al inicio
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Función para alternar el menú
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
